@@ -1,0 +1,48 @@
+{
+  "header": {
+    "navigation": {
+      "home": "Accueil",
+      "price": "Prix",
+      "about": "À propos"
+    },
+    "login": "Connexion"
+  },
+  "hero": {
+    "title": "Transformez votre site web en vidéos professionnelles",
+    "description": "Collez l'URL de votre site web et générez une vidéo professionnelle en quelques secondes.",
+    "analyzeSitePlaceholder": "Collez l'URL de votre site web",
+    "analyzeSite": "Analyser le site"
+  },
+  "footer": {
+    "description": "ICGreborns est un boilerplate générique pour les applications Next.js.",
+    "copyright": "© 2025 ICGreborns. Tous droits réservés.",
+    "sections": {
+      "navigation": {
+        "title": "Navigation",
+        "links": {
+          "home": "Accueil",
+          "pricing": "Tarifs",
+          "about": "À propos",
+          "blog": "Blog"
+        }
+      },
+      "support": {
+        "title": "Support",
+        "links": {
+          "faq": "FAQ",
+          "helpCenter": "Centre d’aide",
+          "contact": "Contact",
+          "status": "Statut du service"
+        }
+      },
+      "legal": {
+        "title": "Légal",
+        "links": {
+          "privacyPolicy": "Politique de confidentialité",
+          "termsOfService": "Conditions d’utilisation",
+          "cookiePolicy": "Cookies"
+        }
+      }
+    }
+  }
+}
