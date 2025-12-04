@@ -1,7 +1,7 @@
 import { getServerUrl } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { authConfig } from "@/features/auth/config/auth.config";
+import { authConfig } from "@/configs/auth-config";
 
 const serverUrl = getServerUrl();
 
