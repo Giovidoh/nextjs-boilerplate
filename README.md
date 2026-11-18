@@ -2,6 +2,18 @@
 
 Starter for Next.js projects with **reusable and customizable** components: every visual value lives in design tokens, so a new design is mostly one file to edit.
 
+## Versions
+
+One release line per Next.js major. Same components and features, different framework layer.
+
+| Next.js | Branch | Status | Start a project |
+| --- | --- | --- | --- |
+| **16.4** | `main` | Active LTS — recommended | `npx create-next-app@latest my-app -e https://github.com/Giovidoh/nextjs-boilerplate` |
+| 15.5 | `next-15` | Maintenance LTS — security fixes until 2027-01-31 | `npx create-next-app@latest my-app -e https://github.com/Giovidoh/nextjs-boilerplate/tree/next-15` |
+| 14.2 | `next-14` | **End of life — known unpatched vulnerabilities** | `npx create-next-app@latest my-app -e https://github.com/Giovidoh/nextjs-boilerplate/tree/next-14` |
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes.
+
 ## Stack
 
 | Area | Choice |

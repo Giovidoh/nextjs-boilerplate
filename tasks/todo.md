@@ -1,6 +1,11 @@
 # TODO
 
 ## In Progress
+- [~] Releases v1.0.0 « fondation » sur 3 lignes (plan : ~/.claude/plans/clever-frolicking-summit.md)
+  - [~] Next 16 → `main`, tag `next16-v1.0.0`
+  - [ ] Next 15 → branche `next-15`, tag `next15-v1.0.0`
+  - [ ] Next 14 → branche `next-14`, tag `next14-v1.0.0` (EOL : avertissement sécurité)
+  - [ ] Publication (push + GitHub Releases) — après accord explicite
 - [~] Vérification visuelle au clic (menu mobile, sélecteur de langue, toggle de thème) — la fenêtre de preview était masquée pendant la session du 2026-11-18
 
 ## To Do
@@ -15,7 +20,6 @@
 - [ ] Outillage : Prettier (+ plugin Tailwind), Husky + lint-staged, Vitest, Playwright, CI GitHub Actions, Renovate
 - [ ] Registre shadcn privé pour partager les composants entre projets / branches de version
 - [ ] Nettoyer `public/assets/images/countries` (250 drapeaux, plus utilisés)
-- [ ] Branche `next-15` (backport) puis releases taguées
 
 ## Done
 - [x] Audit du boilerplate et de la doc Next 13 → 16.4 (2026-11-18)
@@ -33,5 +37,4 @@
 - [x] `pnpm lint` (0 erreur), `pnpm typecheck`, `pnpm build` verts ; pages vérifiées sans erreur console ; validation, toasts et tokens sombres vérifiés dans le navigateur
 
 ## Blocked
-- [!] Releases Next 13 / 14 — EOL avec failles critiques non corrigées, en attente de décision
 - [!] Stratégie d'auth (backend externe vs Better Auth) — en attente de décision
