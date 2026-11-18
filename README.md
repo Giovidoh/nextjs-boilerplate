@@ -1,123 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Boilerplate
 
-## Tech Stack
+Starter for Next.js projects with **reusable and customizable** components: every visual value lives in design tokens, so a new design is mostly one file to edit.
 
-### Core Framework
+## Stack
 
-- **[Next.js](https://nextjs.org)** (v16.0.3) - React framework for production
-- **[React](https://react.dev)** (v19.2.0) - UI library
-- **[TypeScript](https://www.typescriptlang.org)** (v5) - Type-safe JavaScript
+| Area | Choice |
+| --- | --- |
+| Framework | Next.js 16.4 (App Router, Turbopack), React 19.3, TypeScript 5 |
+| UI | Tailwind CSS 4, shadcn/ui on **Base UI**, lucide-react, sonner |
+| Forms | react-hook-form, Zod 4 |
+| Data | TanStack Query 5 |
+| i18n | next-intl 4 (`next/root-params`, locales `fr` / `en`) |
+| Theme | next-themes (light / dark / system) |
 
-### Styling
+Requirements: Node.js ≥ 20.9, pnpm.
 
-- **[Tailwind CSS](https://tailwindcss.com)** (v4) - Utility-first CSS framework
-- **[PostCSS](https://postcss.org)** - CSS processing tool
-- **[tw-animate-css](https://github.com/nextui-org/tailwindcss-animate)** - Tailwind animation utilities
-- **[tailwind-merge](https://github.com/dcastil/tailwind-merge)** - Merge Tailwind classes intelligently
-- **[class-variance-authority](https://cva.style)** - Build type-safe component variants
-- **[clsx](https://github.com/lukeed/clsx)** - Utility for constructing className strings
-
-### UI Components & Icons
-
-- **[Shadcn UI](https://ui.shadcn.com)** - Shadcn UI
-- **[Lucide React](https://lucide.dev)** - Icon library
-- **[Sonner](https://sonner.emilkowal.ski)** - Toast notification component
-
-### Form Management & Validation
-
-- **[React Hook Form](https://react-hook-form.com)** - Performant form library
-- **[Zod](https://zod.dev)** (v4.1.12) - TypeScript-first schema validation
-- **[@hookform/resolvers](https://github.com/react-hook-form/resolvers)** - Validation resolvers for React Hook Form
-
-### State Management & Data Fetching
-
-- **[TanStack Query](https://tanstack.com/query)** (v5.90.8) - Powerful data synchronization for React
-- **[Axios](https://axios-http.com)** - Promise-based HTTP client
-
-### Authentication
-
-- Custom authentication implementation with session management
-
-### Internationalization
-
-- **[next-intl](https://next-intl-docs.vercel.app)** (v4.5.3) - Internationalization for Next.js
-
-### Theming
-
-- **[next-themes](https://github.com/pacocoursey/next-themes)** - Dark mode support for Next.js
-
-### Development Tools
-
-- **[ESLint](https://eslint.org)** (v9) - Code linting
-- **[eslint-config-next](https://nextjs.org/docs/app/building-your-application/configuring/eslint)** - Next.js ESLint configuration
-- **[@tanstack/eslint-plugin-query](https://tanstack.com/query)** - ESLint plugin for TanStack Query
-
-## Getting Started
-
-First, install dependencies:
+## Getting started
 
 ```bash
-npm install
-# or
-yarn install
-# or
 pnpm install
-# or
-bun install
+cp .env.example .env.local
+pnpm dev
 ```
 
-Then, run the development server:
+- App: http://localhost:3000
+- **UI kit** (dev only): http://localhost:3000/fr/ui — every component and variant with the current theme.
+
+| Script | |
+| --- | --- |
+| `pnpm dev` | Dev server |
+| `pnpm build` / `pnpm start` | Production build / server |
+| `pnpm lint` | ESLint |
+| `pnpm typecheck` | Route types + `tsc` |
+
+## Customizing the design
+
+Four levels, from global to local. Reach for the first one that does the job.
+
+### 1. Tokens — `styles/theme.css`
+
+The only file to edit when starting a new design. Copy values from the design file:
+
+```css
+:root {
+  --primary: #0b44c0;                         /* colors */
+  --font-size-h1: clamp(2rem, 1.5rem + 2vw, 3rem); /* fluid type scale */
+  --radius: 0.625rem;                         /* whole radius scale */
+  --control-height: 2.5rem;                   /* buttons, inputs, selects… */
+  --button-radius: 999px;                     /* per-component override */
+  --card-padding: 1.5rem;
+}
+.dark { /* dark values */ }
+[data-theme="client-b"] { /* extra brand theme */ }
+```
+
+Fonts are declared in `configs/fonts.ts` (`next/font`) and mapped to `--font-body`, `--font-display`, `--font-code`.
+Tokens cascade, so they can also be overridden on a subtree (`style={{ "--primary": "…" }}`).
+
+`styles/globals.css` wires the tokens to Tailwind (`bg-primary`, `text-h1`, `font-heading`, `page-container`, `section-spacing`…). You normally don't touch it.
+
+### 2. Variants — `components/ui/*`
+
+Primitives come from shadcn/ui and are **owned code**. Add a variant once in the component's `cva` config, then use it everywhere:
+
+```tsx
+<Button variant="outline" size="lg" />
+```
+
+### 3. Slots — `className` + `classNames`
+
+Multi-part components accept `className` for the root and `classNames` for each part:
+
+```tsx
+<PasswordInput showStrength classNames={{ group: "rounded-full", toggle: "text-primary" }} />
+<FormField classNames={{ label: "sr-only", error: "text-caption" }} … />
+```
+
+Every part also carries a `data-slot` attribute for CSS targeting.
+
+### 4. Composition
+
+Change the rendered element with `render`, or assemble the primitives yourself:
+
+```tsx
+<Button nativeButton={false} render={<Link href="/login" />}>Sign in</Button>
+```
+
+## Project structure
+
+```
+app/[locale]/          Routes (auth, landing, dev UI kit), one static build per locale
+components/ui/         shadcn primitives (Base UI), token-driven
+components/forms/      FormField, PasswordInput, OtpInput, SubmitButton
+components/common/     Logo, LanguageSwitcher, ThemeToggle
+features/<feature>/    Feature modules (components, schemas, api, config)
+configs/               App name, fonts, auth config
+i18n/ + messages/      next-intl routing and catalogs (one file per feature)
+lib/                   Utilities, shared validation rules
+providers/             Client providers (theme, TanStack Query)
+styles/                theme.css (tokens) + globals.css (wiring)
+proxy.ts               Locale routing (Next 16 replacement for middleware)
+```
+
+## Forms
+
+`FormField` wires react-hook-form to the Field primitives (label, ids, aria, description, error):
+
+```tsx
+<FormField control={form.control} name="email" label={t("email")}>
+  {(field) => <Input type="email" {...field} />}
+</FormField>
+```
+
+Zod messages are i18n keys under `validation` (`messages/<locale>/common.json`), translated at render time.
+Password rules live in `lib/validation/password.ts` and feed both the schema and the strength meter.
+
+## Adding shadcn components
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm dlx shadcn@latest add <component>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-## Project Structure
-
-```
-├── app/                    # Next.js app directory
-│   ├── [locale]/          # Internationalized routes
-│   └── api/               # API routes
-├── components/            # React components
-│   └── ui/               # UI component library
-├── features/             # Feature-based modules
-│   └── auth/             # Authentication feature module
-├── i18n/                 # Internationalization configuration
-├── lib/                  # Utility functions and helpers
-│   └── apis/             # API client configurations
-├── messages/             # Translation files
-├── providers/            # React context providers
-└── styles/               # Global styles
-```
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Don't auto-confirm prompts (no `-y`, no piping `yes`): the CLI may overwrite primitives you already customized. Check `git diff components/ui` afterwards and replace fixed sizes/colors with tokens.

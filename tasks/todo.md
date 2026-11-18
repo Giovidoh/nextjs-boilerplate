@@ -1,49 +1,36 @@
 # TODO
 
 ## In Progress
-- [~] Fondation Next 16 + design system personnalisable — branche `feat/next-16-foundation`
+- [~] Vérification visuelle au clic (menu mobile, sélecteur de langue, toggle de thème) — la fenêtre de preview était masquée pendant la session du 2026-11-18
 
 ## To Do
-
-### 1. Mise à niveau Next 16.4.6
-- [x] next 16.4.6 / react 19.3.1 / eslint-config-next 16.4.6 / next-intl 4.15 (ESLint 9 : plusieurs plugins ne supportent pas encore ESLint 10)
-- [x] `middleware.ts` → `proxy.ts`, suppression du code mort
-- [x] SVGR via `turbopack.rules` (plus de config webpack)
-- [x] `pnpm-workspace.yaml` valide, `packageManager` + `engines` + script `typecheck`
-- [x] ESLint flat config fonctionnel (`pnpm lint` : 0 erreur)
-- [x] Retirer pg, @types/pg, react-phone-number-input
-- [x] i18n via `next/root-params` + `generateStaticParams` → pages SSG par locale
-- [x] QueryClient par requête côté serveur (fuite de cache entre utilisateurs corrigée)
-- [x] Pages OTP / reset : `searchParams` lus côté serveur (plus de `useSearchParams` sans Suspense)
-- [ ] Activer `cacheComponents` + `partialPrefetching` (défaut create-next-app 16.4) — après la migration des pages
-
-### 2. Tokens de design
-- [ ] `styles/theme.css` : couleurs, typo fluide, rayons, ombres, tokens composant
-- [ ] `styles/globals.css` : `@theme inline` qui expose les tokens à Tailwind
-- [ ] Mode sombre (`.dark`) + support multi-thèmes (`[data-theme]`)
-- [ ] ThemeProvider (next-themes) + polices via `next/font`
-
-### 3. Primitives ui (shadcn, Base UI)
-- [ ] Réinstaller les primitives avec Base UI, sans aucune valeur en dur
-- [ ] Variantes (`cva`) alimentées par les tokens : button, input, select, checkbox, switch…
-
-### 4. Composants composés (slots + classNames)
-- [ ] Field (Label / Control / Description / Error) branché sur react-hook-form
-- [ ] PasswordInput (toggle + jauge de force, i18n)
-- [ ] OtpInput contrôlé
-- [ ] LanguageSwitcher locale-aware
-
-### 5. Migration
-- [ ] Pages auth + landing sur les nouveaux composants, liens via `@/i18n/navigation`
-- [ ] Supprimer `components/*/Base*`
-- [ ] Page `/ui` (dev uniquement) qui montre chaque composant et ses variantes
-
-### 6. Vérification
-- [ ] `pnpm lint`, `pnpm typecheck`, `pnpm build` verts
-- [ ] Rendu vérifié dans le navigateur (clair / sombre, fr / en)
+- [ ] Activer `cacheComponents` + `partialPrefetching` (défaut create-next-app 16.4) et adapter les pages
+- [ ] Module API : client serveur typé (`server-only`), erreurs normalisées, route proxy réécrite (multipart, en-têtes, Set-Cookie, 204), validation des variables d'environnement
+- [ ] Module auth (selon la stratégie choisie) : session httpOnly, garde dans `proxy.ts` + vérification serveur, rôles, OAuth réel
+- [ ] Kit SEO : métadonnées traduites, Open Graph, sitemap, robots, manifest
+- [ ] Pages `not-found`, `error`, `global-error`, `loading` traduites
+- [ ] Composants composés supplémentaires : DataTable, DatePicker, FileUpload, PhoneInput, Combobox, ConfirmDialog, EmptyState
+- [ ] Layout tableau de bord (sidebar, topbar, menu utilisateur, fil d'Ariane) + pages paramètres
+- [ ] Sections landing supplémentaires : tarifs, FAQ, CTA, témoignages
+- [ ] Outillage : Prettier (+ plugin Tailwind), Husky + lint-staged, Vitest, Playwright, CI GitHub Actions, Renovate
+- [ ] Registre shadcn privé pour partager les composants entre projets / branches de version
+- [ ] Nettoyer `public/assets/images/countries` (250 drapeaux, plus utilisés)
+- [ ] Branche `next-15` (backport) puis releases taguées
 
 ## Done
 - [x] Audit du boilerplate et de la doc Next 13 → 16.4 (2026-11-18)
+- [x] Mise à niveau Next 16.4.6 / React 19.3 / next-intl 4.15 (`proxy.ts`, SVGR via Turbopack, root params, pages SSG par locale) — commit 736c7cf
+- [x] QueryClient par requête côté serveur (fuite de cache entre utilisateurs corrigée)
+- [x] Tokens de design : `styles/theme.css` (couleurs, typo fluide, rayons, contrôles, cartes, layout, sombre, multi-thèmes) + câblage `globals.css`
+- [x] Polices via `next/font` (`configs/fonts.ts`) + ThemeProvider (clair / sombre / système)
+- [x] Primitives shadcn sur Base UI, tailles / rayons / fonds pilotés par les tokens (button, input, textarea, select, input-group, input-otp, card)
+- [x] Composants composés avec `classNames` par slot : FormField, PasswordInput, OtpInput, SubmitButton, Logo, LanguageSwitcher, ThemeToggle, AuthShell, OAuthButtons
+- [x] Messages Zod = clés i18n traduites par FormField ; règles mot de passe partagées schéma / jauge
+- [x] Pages auth + landing migrées (liens locale-aware, TanStack `useMutation`, `authApi` qui échoue explicitement tant que l'auth n'est pas branchée)
+- [x] Suppression des `Base*`, de gsap, des paquets Radix, des restes d'anciens projets
+- [x] `API_URL` côté serveur uniquement + `.env.example`
+- [x] Page `/ui` (dev uniquement, 404 en prod)
+- [x] `pnpm lint` (0 erreur), `pnpm typecheck`, `pnpm build` verts ; pages vérifiées sans erreur console ; validation, toasts et tokens sombres vérifiés dans le navigateur
 
 ## Blocked
 - [!] Releases Next 13 / 14 — EOL avec failles critiques non corrigées, en attente de décision
