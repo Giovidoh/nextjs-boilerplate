@@ -1,5 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/feedback/badge";
+import { Button } from "@/components/actions/button";
 import authRoutes from "@/features/auth/config/routes";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
