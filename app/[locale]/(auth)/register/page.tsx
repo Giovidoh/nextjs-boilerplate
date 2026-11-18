@@ -3,15 +3,18 @@ import { OAuthButtons } from "@/features/auth/components/oauth-buttons";
 import { RegisterForm } from "@/features/auth/components/register-form";
 import authRoutes from "@/features/auth/config/routes";
 import { Link } from "@/i18n/navigation";
+import { initLocale } from "@/i18n/locale";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("auth.register");
+export async function generateMetadata({ params }: PageProps<"/[locale]/register">): Promise<Metadata> {
+  const locale = await initLocale(params);
+  const t = await getTranslations({ locale, namespace: "auth.register" });
   return { title: t("title") };
 }
 
-export default async function RegisterPage() {
+export default async function RegisterPage({ params }: PageProps<"/[locale]/register">) {
+  await initLocale(params);
   const t = await getTranslations("auth.register");
 
   return (

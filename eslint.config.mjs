@@ -1,13 +1,15 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import { FlatCompat } from "@eslint/eslintrc";
 import pluginQuery from "@tanstack/eslint-plugin-query";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
+// eslint-config-next 15 ships legacy configs: load them through FlatCompat.
+const compat = new FlatCompat({ baseDirectory: dirname(fileURLToPath(import.meta.url)) });
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   ...pluginQuery.configs["flat/recommended"],
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"] },
   {
     rules: {
       "@typescript-eslint/no-unused-vars": [
@@ -17,6 +19,6 @@ const eslintConfig = defineConfig([
       "@typescript-eslint/no-explicit-any": "warn",
     },
   },
-]);
+];
 
 export default eslintConfig;

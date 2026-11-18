@@ -2,9 +2,9 @@ import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 
 /**
- * Next.js 16 proxy (formerly `middleware`).
- * Handles locale detection and prefixing. Auth checks will plug in here
- * as an optimistic redirect layer; the real session check lives server-side.
+ * Locale detection and prefixing. Auth checks will plug in here as an
+ * optimistic redirect layer; the real session check lives server-side.
+ * (Next.js 16 renames this file to `proxy.ts`.)
  */
 export default createMiddleware(routing);
 

@@ -1,7 +1,10 @@
 import { LanguageSwitcher } from "@/components/common/language-switcher";
 import { ThemeToggle } from "@/components/common/theme-toggle";
+import { initLocale } from "@/i18n/locale";
 
-export default function AuthLayout({ children }: LayoutProps<"/[locale]">) {
+export default async function AuthLayout({ children, params }: LayoutProps<"/[locale]">) {
+  await initLocale(params);
+
   return (
     <div className="flex min-h-svh flex-col bg-muted/40">
       <header className="flex justify-end gap-2 p-4">

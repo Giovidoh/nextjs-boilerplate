@@ -1,4 +1,6 @@
-# Next.js Boilerplate
+# Next.js Boilerplate — Next.js 15 line
+
+> You are on the **`next-15`** branch (Next.js 15.5, Maintenance LTS: security fixes until 2027-01-31). New projects should prefer `main` (Next.js 16).
 
 Starter for Next.js projects with **reusable and customizable** components: every visual value lives in design tokens, so a new design is mostly one file to edit.
 
@@ -18,14 +20,14 @@ See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 | Area | Choice |
 | --- | --- |
-| Framework | Next.js 16.4 (App Router, Turbopack), React 19.3, TypeScript 5 |
+| Framework | Next.js 15.5 (App Router, webpack), React 19.3, TypeScript 5 |
 | UI | Tailwind CSS 4, shadcn/ui on **Base UI**, lucide-react, sonner |
 | Forms | react-hook-form, Zod 4 |
 | Data | TanStack Query 5 |
-| i18n | next-intl 4 (`next/root-params`, locales `fr` / `en`) |
+| i18n | next-intl 4 (`setRequestLocale` via `i18n/locale.ts`, locales `fr` / `en`) |
 | Theme | next-themes (light / dark / system) |
 
-Requirements: Node.js ≥ 20.9, pnpm.
+Requirements: Node.js ≥ 20.9 (Node 18 is end-of-life), pnpm.
 
 ## Getting started
 
@@ -111,8 +113,14 @@ i18n/ + messages/      next-intl routing and catalogs (one file per feature)
 lib/                   Utilities, shared validation rules
 providers/             Client providers (theme, TanStack Query)
 styles/                theme.css (tokens) + globals.css (wiring)
-proxy.ts               Locale routing (Next 16 replacement for middleware)
+middleware.ts          Locale routing (renamed proxy.ts on Next 16)
 ```
+
+## Next.js 15 specifics
+
+- Every layout, page and `generateMetadata` under `[locale]` starts with `await initLocale(params)` (`i18n/locale.ts`): it validates the locale and enables static rendering. Pass the locale explicitly in metadata: `getTranslations({ locale, namespace })`.
+- SVG imports go through the webpack config in `next.config.ts` (`*.svg` → React component, `*.svg?url` → asset).
+- ESLint loads `eslint-config-next` through `FlatCompat`.
 
 ## Forms
 

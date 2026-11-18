@@ -1,12 +1,12 @@
 import { Toaster } from "@/components/ui/sonner";
 import { APP_DESCRIPTION, APP_NAME } from "@/configs/app-config";
 import { fontVariables } from "@/configs/fonts";
+import { initLocale } from "@/i18n/locale";
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/providers";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import * as rootParams from "next/root-params";
 
 export const metadata: Metadata = {
   title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
@@ -17,8 +17,8 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
-  const locale = await rootParams.locale();
+export default async function RootLayout({ children, params }: LayoutProps<"/[locale]">) {
+  const locale = await initLocale(params);
 
   return (
     <html lang={locale} className={fontVariables} suppressHydrationWarning>
