@@ -10,5 +10,5 @@ export default createMiddleware(routing);
 
 export const config = {
   // Match all pathnames except API routes, Next internals and files with an extension.
-  matcher: "/((?!api|trpc|_next|_vercel|.*\..*).*)",
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
