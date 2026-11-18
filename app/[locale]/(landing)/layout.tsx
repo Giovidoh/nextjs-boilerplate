@@ -1,5 +1,5 @@
-import Footer from "@/features/landing/components/layouts/Footer";
-import Header from "@/features/landing/components/layouts/Header";
+import Footer from "@/features/landing/components/footer";
+import Header from "@/features/landing/components/header";
 
 export default function LandingLayout({ children }: LayoutProps<"/[locale]">) {
   return (
