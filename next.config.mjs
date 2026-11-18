@@ -1,15 +1,14 @@
-import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
-const nextConfig: NextConfig = {
-  // SVG imports (webpack, the default bundler on Next.js 15):
+/** @type {import("next").NextConfig} */
+const nextConfig = {
+  // SVG imports:
   // `import Icon from "./icon.svg"` → React component (SVGR).
   // `import iconUrl from "./icon.svg?url"` → regular static asset.
   webpack(config) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- webpack rules are untyped here
-    const fileLoaderRule = config.module.rules.find((rule: any) => rule.test?.test?.(".svg"));
+    const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.(".svg"));
 
     config.module.rules.push(
       { ...fileLoaderRule, test: /\.svg$/i, resourceQuery: /url/ },

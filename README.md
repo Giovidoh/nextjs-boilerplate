@@ -1,6 +1,7 @@
-# Next.js Boilerplate — Next.js 15 line
+# Next.js Boilerplate — Next.js 14 line
 
-> You are on the **`next-15`** branch (Next.js 15.5, Maintenance LTS: security fixes until 2027-01-31). New projects should prefer `main` (Next.js 16).
+> [!WARNING]
+> You are on the **`next-14`** branch. **Next.js 14 is end-of-life**: Vercel no longer publishes security fixes for it, and 14.2.35 has known vulnerabilities (including critical ones) that will never be patched. Use this line only for projects that cannot move off Next.js 14, and plan the upgrade. New projects should use `main` (Next.js 16).
 
 Starter for Next.js projects with **reusable and customizable** components: every visual value lives in design tokens, so a new design is mostly one file to edit.
 
@@ -20,7 +21,7 @@ See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 | Area | Choice |
 | --- | --- |
-| Framework | Next.js 15.5 (App Router, webpack), React 19.3, TypeScript 5 |
+| Framework | Next.js 14.2 (App Router, webpack), React 18.3, TypeScript 5 |
 | UI | Tailwind CSS 4, shadcn/ui on **Base UI**, lucide-react, sonner |
 | Forms | react-hook-form, Zod 4 |
 | Data | TanStack Query 5 |
@@ -116,11 +117,14 @@ styles/                theme.css (tokens) + globals.css (wiring)
 middleware.ts          Locale routing (renamed proxy.ts on Next 16)
 ```
 
-## Next.js 15 specifics
+## Next.js 14 specifics
 
 - Every layout, page and `generateMetadata` under `[locale]` starts with `await initLocale(params)` (`i18n/locale.ts`): it validates the locale and enables static rendering. Pass the locale explicitly in metadata: `getTranslations({ locale, namespace })`.
-- SVG imports go through the webpack config in `next.config.ts` (`*.svg` → React component, `*.svg?url` → asset).
-- ESLint loads `eslint-config-next` through `FlatCompat`.
+- `params` and `searchParams` are plain objects. `types/next.d.ts` declares the global `PageProps` / `LayoutProps` helpers so page code stays identical to the other lines (awaiting them is a no-op).
+- **React 18**: `ref` is not a regular prop. Components that receive a ref (from react-hook-form or from Base UI's `render`) use `forwardRef`: `Button`, `Input`, `Textarea`, `InputGroupInput`, `InputGroupButton`, `InputOTP`, `PasswordInput`, `OtpInput`. Do the same for any new component you pass to `render` or to a form field.
+- SVG imports go through the webpack config in `next.config.mjs` (`*.svg` → React component, `*.svg?url` → asset).
+- Geist comes from the `geist` package (not in Next.js 14's `next/font/google`).
+- ESLint 8 with `.eslintrc.json`. `pnpm typecheck` runs `tsc --noEmit` (no `next typegen` on 14).
 
 ## Forms
 

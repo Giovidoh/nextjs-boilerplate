@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/input-otp";
 import { cn, type SlotClassNames } from "@/lib/utils";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { Fragment, type ComponentProps } from "react";
+import { forwardRef, Fragment, type ComponentProps } from "react";
 
 export type OtpInputSlot = "root" | "group" | "slot" | "separator";
 
@@ -28,21 +28,26 @@ export interface OtpInputProps extends BaseProps {
 }
 
 /** Controlled one-time-code input (digits only by default). */
-export function OtpInput({
-  length = 6,
-  groups,
-  pattern = REGEXP_ONLY_DIGITS,
-  value,
-  onChange,
-  className,
-  classNames,
-  ...props
-}: OtpInputProps) {
+// forwardRef: on React 18, `ref` is not a prop (react-hook-form needs it to focus errors).
+export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function OtpInput(
+  {
+    length = 6,
+    groups,
+    pattern = REGEXP_ONLY_DIGITS,
+    value,
+    onChange,
+    className,
+    classNames,
+    ...props
+  },
+  ref,
+) {
   const layout = groups ?? [length];
   const starts = layout.map((_, i) => layout.slice(0, i).reduce((sum, n) => sum + n, 0));
 
   return (
     <InputOTP
+      ref={ref}
       maxLength={length}
       pattern={pattern}
       value={value ?? ""}
@@ -68,4 +73,4 @@ export function OtpInput({
       ))}
     </InputOTP>
   );
-}
+});

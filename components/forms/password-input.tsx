@@ -10,7 +10,7 @@ import { cn, type SlotClassNames } from "@/lib/utils";
 import { PASSWORD_MIN_LENGTH, passwordRules } from "@/lib/validation/password";
 import { CheckIcon, EyeIcon, EyeOffIcon, XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
+import { forwardRef, useEffect, useState, type ComponentProps, type ReactNode } from "react";
 
 export type PasswordInputSlot =
   | "root"
@@ -46,19 +46,23 @@ const segmentTone = (score: number, max: number) => {
   return "bg-success";
 };
 
-export function PasswordInput({
-  showStrength = false,
-  requirements,
-  onStrengthChange,
-  startIcon,
-  className,
-  classNames,
-  value,
-  defaultValue,
-  onChange,
-  disabled,
-  ...props
-}: PasswordInputProps) {
+// forwardRef: on React 18, `ref` is not a prop (react-hook-form needs it to focus errors).
+export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(function PasswordInput(
+  {
+    showStrength = false,
+    requirements,
+    onStrengthChange,
+    startIcon,
+    className,
+    classNames,
+    value,
+    defaultValue,
+    onChange,
+    disabled,
+    ...props
+  },
+  ref,
+) {
   const t = useTranslations("components.passwordInput");
   const tRules = useTranslations("validation.password");
   const [visible, setVisible] = useState(false);
@@ -86,6 +90,7 @@ export function PasswordInput({
       <InputGroup className={classNames?.group}>
         {startIcon && <InputGroupAddon>{startIcon}</InputGroupAddon>}
         <InputGroupInput
+          ref={ref}
           type={visible ? "text" : "password"}
           autoComplete={showStrength ? "new-password" : "current-password"}
           value={value}
@@ -152,4 +157,4 @@ export function PasswordInput({
       )}
     </div>
   );
-}
+});
