@@ -5,7 +5,7 @@ import {
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/components/ui/input-group";
+} from "@/components/forms/input-group";
 import { cn, type SlotClassNames } from "@/lib/utils";
 import { PASSWORD_MIN_LENGTH, passwordRules } from "@/lib/validation/password";
 import { CheckIcon, EyeIcon, EyeOffIcon, XIcon } from "lucide-react";
