@@ -2,10 +2,11 @@
 
 ## In Progress
 - [~] Releases v1.0.0 « fondation » sur 3 lignes (plan : ~/.claude/plans/clever-frolicking-summit.md)
-  - [~] Next 16 → `main`, tag `next16-v1.0.0`
-  - [ ] Next 15 → branche `next-15`, tag `next15-v1.0.0`
-  - [ ] Next 14 → branche `next-14`, tag `next14-v1.0.0` (EOL : avertissement sécurité)
-  - [ ] Publication (push + GitHub Releases) — après accord explicite
+  - [x] Next 16 → `main`, tag `next16-v1.0.0` (c68ccc9) — lint/typecheck/build/smoke OK
+  - [x] Next 15 → branche `next-15`, tag `next15-v1.0.0` (cb1049b) — lint/typecheck/build/smoke + dev OK
+  - [x] Next 14 → branche `next-14`, tag `next14-v1.0.0` (196e5f4) — lint/typecheck/build/smoke + dev (refs React 18) OK, avertissement EOL
+  - [ ] Publication (push des branches + tags, GitHub Releases depuis `docs/releases/*.md`) — après accord explicite
+- Règle de maintenance : toute fonctionnalité arrive d'abord sur `main`, puis `git cherry-pick` vers `next-15` puis `next-14` ; sur 14, passer en `forwardRef` tout composant qui reçoit une ref (RHF ou `render` de Base UI)
 - [~] Vérification visuelle au clic (menu mobile, sélecteur de langue, toggle de thème) — la fenêtre de preview était masquée pendant la session du 2026-11-18
 
 ## To Do
