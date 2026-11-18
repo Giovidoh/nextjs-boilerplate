@@ -1,5 +1,5 @@
 import { Logo } from "@/components/common/logo";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/display/card";
 import { cn, type SlotClassNames } from "@/lib/utils";
 import type { ReactNode } from "react";
 
