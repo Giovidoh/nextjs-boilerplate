@@ -2,23 +2,16 @@
 
 import { Progress as ProgressPrimitive } from "@base-ui/react/progress"
 import { cn } from "cn"
-import { useLocale } from "next-intl"
 
 function Progress({
   className,
   children,
   value,
-  locale,
   ...props
 }: ProgressPrimitive.Root.Props) {
-  // Format with the app locale, not the runtime one: server and browser
-  // would otherwise disagree ("60%" vs "60 %") and break hydration.
-  const appLocale = useLocale()
-
   return (
     <ProgressPrimitive.Root
       value={value}
-      locale={locale ?? appLocale}
       data-slot="progress"
       className={cn("flex flex-wrap gap-3", className)}
       {...props}

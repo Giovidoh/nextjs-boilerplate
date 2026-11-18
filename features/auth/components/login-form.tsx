@@ -2,10 +2,10 @@
 
 import { FormField } from "@/components/forms/form-field";
 import { PasswordInput } from "@/components/forms/password-input";
-import { SubmitButton } from "@/components/forms/submit-button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { FieldGroup } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { SubmitButton } from "@/components/actions/submit-button";
+import { Checkbox } from "@/components/forms/checkbox";
+import { FieldGroup } from "@/components/forms/field";
+import { Input } from "@/components/forms/input";
 import { authApi } from "@/features/auth/api";
 import authRoutes from "@/features/auth/config/routes";
 import { loginSchema, type LoginValues } from "@/features/auth/schemas";
@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/feedback/toaster";
 
 export function LoginForm() {
   const t = useTranslations("auth.login");
