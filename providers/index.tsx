@@ -1,25 +1,9 @@
 "use client";
 
-import { ReactNode } from "react";
-import NextIntlProvider from "./NextIntlProvider";
-import TanstackProvider from "./TanstackProvider";
+import type { ReactNode } from "react";
+import { QueryProvider } from "./QueryProvider";
 
-export const Providers = ({
-  children,
-  locale,
-  messages,
-  timeZone,
-}: {
-  children: ReactNode;
-  locale: string;
-  messages: Record<string, string>;
-  timeZone?: string;
-}) => {
-  return (
-    <TanstackProvider>
-      <NextIntlProvider locale={locale} messages={messages} timeZone={timeZone}>
-        {children}
-      </NextIntlProvider>
-    </TanstackProvider>
-  );
-};
+/** Client-side providers. next-intl's provider is rendered by the server layout. */
+export function Providers({ children }: { children: ReactNode }) {
+  return <QueryProvider>{children}</QueryProvider>;
+}

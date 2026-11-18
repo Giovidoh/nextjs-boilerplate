@@ -1,21 +1,16 @@
-"use client";
-
 import LogoLink from "@/components/buttons/LogoLink";
 import Main from "@/components/layouts/Main";
 import ResetPasswordForm from "@/features/auth/components/forms/ResetPasswordForm";
-import { useTranslations } from "next-intl";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 
-export default function ResetPasswordPage() {
-  const t = useTranslations("auth.resetPassword");
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email") || "";
-  const code = searchParams.get("code") || "";
+export default async function ResetPasswordPage({
+  searchParams,
+}: PageProps<"/[locale]/reset-password">) {
+  const { email, code } = await searchParams;
+  if (typeof email !== "string" || typeof code !== "string") notFound();
 
-  if (!email || !code) {
-    return <div>Invalid request</div>;
-  }
+  const t = await getTranslations("auth.resetPassword");
 
   return (
     <Main>

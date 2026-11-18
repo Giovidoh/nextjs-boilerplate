@@ -1,40 +1,31 @@
 import { Toaster } from "@/components/ui/sonner";
+import { APP_DESCRIPTION, APP_NAME } from "@/configs/app-config";
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/providers";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { hasLocale } from "next-intl";
-import { getMessages } from "next-intl/server";
-import { notFound } from "next/navigation";
-import { APP_NAME, APP_DESCRIPTION } from "@/configs/app-config";
+import { NextIntlClientProvider } from "next-intl";
+import * as rootParams from "next/root-params";
 
 export const metadata: Metadata = {
-  title: APP_NAME,
+  title: { default: APP_NAME, template: `%s · ${APP_NAME}` },
   description: APP_DESCRIPTION,
 };
 
-type Props = {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-};
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
-export default async function LocaleLayout({ children, params }: Props) {
-  // Ensure that the incoming `locale` is valid
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  // Providing all messages to the client side is the easiest way to get started
-  const messages = await getMessages();
+export default async function RootLayout({ children }: LayoutProps<"/[locale]">) {
+  const locale = await rootParams.locale();
 
   return (
-    <html lang={locale}>
-      <body className="font-itc-avant-garde-gothic-pro antialiased">
-        <Providers locale={locale} messages={messages} timeZone="UTC">
-          {children}
-        </Providers>
-        <Toaster richColors />
+    <html lang={locale} suppressHydrationWarning>
+      <body className="antialiased">
+        <NextIntlClientProvider>
+          <Providers>{children}</Providers>
+          <Toaster richColors />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

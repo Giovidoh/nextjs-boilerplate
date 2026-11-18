@@ -1,31 +1,26 @@
 import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
+import { notFound } from "next/navigation";
+import * as rootParams from "next/root-params";
 import { routing } from "./routing";
 
-export default getRequestConfig(async ({ requestLocale }) => {
-  // Typically corresponds to the `[locale]` segment
-  const requested = await requestLocale;
-  const locale = hasLocale(routing.locales, requested)
-    ? requested
-    : routing.defaultLocale;
+// One file per feature in messages/<locale>/; merged into a single catalog.
+const namespaces = ["common", "landing", "auth", "account"] as const;
 
-  // Import and merge all translation files by feature
-  const [common, landing, auth, account] = await Promise.all([
-    import(`../messages/${locale}/common.json`),
-    import(`../messages/${locale}/landing.json`),
-    import(`../messages/${locale}/auth.json`),
-    import(`../messages/${locale}/account.json`),
-  ]);
+export default getRequestConfig(async ({ locale }) => {
+  if (!locale) {
+    const requested = await rootParams.locale();
+    if (!hasLocale(routing.locales, requested)) notFound();
+    locale = requested;
+  }
+
+  const catalogs = await Promise.all(
+    namespaces.map((ns) => import(`../messages/${locale}/${ns}.json`)),
+  );
 
   return {
     locale,
-    messages: {
-      ...common.default,
-      ...landing.default,
-      ...auth.default,
-      ...account.default,
-    },
-    // Set a default timeZone to avoid ENVIRONMENT_FALLBACK mismatches
+    messages: Object.assign({}, ...catalogs.map((c) => c.default)),
     timeZone: "UTC",
   };
 });

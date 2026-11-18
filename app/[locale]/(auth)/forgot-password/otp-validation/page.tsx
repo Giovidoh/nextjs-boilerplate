@@ -1,19 +1,16 @@
-'use client';
-
 import LogoLink from '@/components/buttons/LogoLink';
 import Main from '@/components/layouts/Main';
 import OtpValidationForm from '@/features/auth/components/forms/OtpValidationForm';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
-export default function ForgotPasswordOtpValidationPage() {
-  const t = useTranslations('auth.otpValidation');
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email') || '';
+export default async function ForgotPasswordOtpValidationPage({
+  searchParams,
+}: PageProps<'/[locale]/forgot-password/otp-validation'>) {
+  const { email } = await searchParams;
+  if (typeof email !== 'string') notFound();
 
-  if (!email) {
-    return <div>Invalid request</div>;
-  }
+  const t = await getTranslations('auth.otpValidation');
 
   return (
     <Main>

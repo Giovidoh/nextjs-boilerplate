@@ -1,15 +1,13 @@
-'use client';
-
 import LogoLink from '@/components/buttons/LogoLink';
 import Main from '@/components/layouts/Main';
 import OtpValidationForm from '@/features/auth/components/forms/OtpValidationForm';
-import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 
-export default function OtpValidationPage() {
-  const t = useTranslations('auth.otpValidation');
-  const searchParams = useSearchParams();
-  const email = searchParams.get('email') || '';
+export default async function OtpValidationPage({
+  searchParams,
+}: PageProps<'/[locale]/register/otp-validation'>) {
+  const { email } = await searchParams;
+  const t = await getTranslations('auth.otpValidation');
 
   return (
     <Main>
@@ -23,7 +21,7 @@ export default function OtpValidationPage() {
             </div>
           </div>
           <div className="w-full max-w-md">
-            <OtpValidationForm email={email} />
+            <OtpValidationForm email={typeof email === 'string' ? email : ''} />
           </div>
         </div>
       </section>
