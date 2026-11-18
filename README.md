@@ -149,7 +149,11 @@ middleware.ts          Locale routing (renamed proxy.ts on Next 16)
 
 - Every layout, page and `generateMetadata` under `[locale]` starts with `await initLocale(params)` (`i18n/locale.ts`): it validates the locale and enables static rendering. Pass the locale explicitly in metadata: `getTranslations({ locale, namespace })`.
 - `params` and `searchParams` are plain objects. `types/next.d.ts` declares the global `PageProps` / `LayoutProps` helpers so page code stays identical to the other lines (awaiting them is a no-op).
-- **React 18**: `ref` is not a regular prop. Components that receive a ref (from react-hook-form or from Base UI's `render`) use `forwardRef`: `Button`, `Input`, `Textarea`, `InputGroupInput`, `InputGroupButton`, `InputOTP`, `PasswordInput`, `OtpInput`. Do the same for any new component you pass to `render` or to a form field.
+- **React 18**: `ref` is not a regular prop. Components that receive a ref (from react-hook-form or from Base UI's `render`) use `forwardRef`, in both layers:
+  - design system: `Button`, `Input`, `Textarea`, `InputGroupInput`, `PasswordInput`, `OtpInput`;
+  - `components/ui`: `Button`, `Input`, `Textarea`, `InputGroupInput`, `InputGroupButton`, `InputOTP` — the **only** patch allowed in third-party code on this line, listed in `components/ui/README.md`.
+
+  Do the same for any new component you pass to `render` or to a form field.
 - SVG imports go through the webpack config in `next.config.mjs` (`*.svg` → React component, `*.svg?url` → asset).
 - Geist comes from the `geist` package (not in Next.js 14's `next/font/google`).
 - ESLint 8 with `.eslintrc.json`. `pnpm typecheck` runs `tsc --noEmit` (no `next typegen` on 14).
