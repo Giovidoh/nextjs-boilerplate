@@ -1,27 +1,29 @@
-import LogoLink from '@/components/buttons/LogoLink';
-import Main from '@/components/layouts/Main';
-import ForgotPasswordForm from '@/features/auth/components/forms/ForgotPasswordForm';
-import { useTranslations } from 'next-intl';
+import { AuthShell } from "@/features/auth/components/auth-shell";
+import { ForgotPasswordForm } from "@/features/auth/components/forgot-password-form";
+import authRoutes from "@/features/auth/config/routes";
+import { Link } from "@/i18n/navigation";
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export default function ForgotPasswordPage() {
-  const t = useTranslations('auth.forgotPassword');
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("auth.forgotPassword");
+  return { title: t("title") };
+}
+
+export default async function ForgotPasswordPage() {
+  const t = await getTranslations("auth.forgotPassword");
 
   return (
-    <Main>
-      <section className="flex h-full min-h-screen items-center justify-center px-5">
-        <div className="border-primary z-10 flex h-full w-full max-w-4xl flex-col items-center justify-center gap-5 rounded-md border bg-white px-5 py-20 md:gap-7">
-          <div className="flex flex-col items-center justify-center gap-5">
-            <LogoLink />
-            <div className="flex flex-col items-center text-center">
-              <h1 className="text-[clamp(24px,_3vw,_28px)]">{t('title')}</h1>
-              <p className="p2 max-w-md">{t('description')}</p>
-            </div>
-          </div>
-          <div className="w-full max-w-md">
-            <ForgotPasswordForm />
-          </div>
-        </div>
-      </section>
-    </Main>
+    <AuthShell
+      title={t("title")}
+      description={t("description")}
+      footer={
+        <Link href={authRoutes.login} className="font-medium text-primary hover:underline">
+          {t("backToLogin")}
+        </Link>
+      }
+    >
+      <ForgotPasswordForm />
+    </AuthShell>
   );
 }

@@ -1,15 +1,12 @@
 import Footer from "@/features/landing/components/layouts/Footer";
 import Header from "@/features/landing/components/layouts/Header";
-import Main from "@/components/layouts/Main";
 
-export default function LandingPageLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function LandingLayout({ children }: LayoutProps<"/[locale]">) {
   return (
-    <section className="flex min-h-screen flex-col">
+    <div className="flex min-h-svh flex-col">
       <Header />
-      <Main>{children}</Main>
+      <main className="flex-1">{children}</main>
       <Footer />
-    </section>
+    </div>
   );
 }

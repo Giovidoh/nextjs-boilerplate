@@ -1,18 +1,11 @@
-const routes = {
-  login: {
-    index: '/login',
-  },
-  register: {
-    index: '/register',
-    otpValidation: '/register/otp-validation',
-  },
-  forgotPassword: {
-    index: '/forgot-password',
-    otpValidation: '/forgot-password/otp-validation',
-  },
-  resetPassword: {
-    index: '/reset-password',
-  },
-};
+/** Auth routes, without locale prefix — use with Link / router from `@/i18n/navigation`. */
+const authRoutes = {
+  login: "/login",
+  register: "/register",
+  registerOtp: "/register/otp-validation",
+  forgotPassword: "/forgot-password",
+  forgotPasswordOtp: "/forgot-password/otp-validation",
+  resetPassword: "/reset-password",
+} as const;
 
-export default routes;
+export default authRoutes;

@@ -1,130 +1,95 @@
 "use client";
 
-import BaseButton from "@/components/buttons/BaseButton";
-import BurgerBtn from "@/components/buttons/BurgerButton";
-import LogoLink from "@/components/buttons/LogoLink";
-import LanguageSelector from "@/components/selects/LanguageSelector";
+import { LanguageSwitcher } from "@/components/common/language-switcher";
+import { Logo } from "@/components/common/logo";
+import { ThemeToggle } from "@/components/common/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import authRoutes from "@/features/auth/config/routes";
+import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
+import { MenuIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useState } from "react";
 
-const Navbar = () => {
-  const t = useTranslations("header.navigation");
+const navigation = [
+  { key: "home", href: "/" },
+  { key: "pricing", href: "/#pricing" },
+  { key: "about", href: "/#about" },
+] as const;
 
-  const links = [
-    {
-      label: t("home"),
-      href: "/",
-    },
-    {
-      label: t("price"),
-      href: "#price",
-    },
-    {
-      label: t("about"),
-      href: "#about",
-    },
-  ];
-
-  return (
-    <nav className="hidden items-center gap-[clamp(24px,4vw,40px)] md:flex">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="hover:text-primary text-[clamp(14px,1.5vw,16px)] font-medium text-black transition"
-        >
-          {link.label}
-        </Link>
-      ))}
-    </nav>
-  );
-};
-
-const MobileNavbar = ({
-  isOpen,
-  setIsOpen,
-}: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}) => {
-  const t = useTranslations("header.navigation");
-
-  const links = [
-    {
-      label: t("home"),
-      href: "/",
-    },
-    {
-      label: t("price"),
-      href: "#price",
-    },
-    {
-      label: t("about"),
-      href: "#about",
-    },
-  ];
-
-  return (
-    <nav className="flex flex-col items-center justify-center gap-[clamp(24px,4vw,40px)]">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className="hover:text-primary text-[clamp(16px,1.5vw,18px)] font-medium text-black transition"
-          onClick={() => setIsOpen(false)}
-        >
-          {link.label}
-        </Link>
-      ))}
-    </nav>
-  );
-};
-
-const Header = () => {
+export default function Header({ className }: { className?: string }) {
   const t = useTranslations("header");
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full bg-transparent backdrop-blur-xl">
-      <div className="container mx-auto flex w-full flex-col items-center gap-5 px-5 py-5 md:px-16">
-        <div className="flex w-full items-center justify-between">
-          <LogoLink />
-          <Navbar />
-          <div className="flex items-center gap-5">
-            <div className="hidden md:block">
-              <LanguageSelector />
-            </div>
-            <div className="hidden sm:block">
-              <BaseButton isLink href="/login">
-                {t("login")}
-              </BaseButton>
-            </div>
+    <header
+      className={cn(
+        "sticky top-0 z-50 h-(--header-height) border-b bg-background/80 backdrop-blur-xl",
+        className,
+      )}
+    >
+      <div className="page-container flex h-full items-center justify-between gap-6">
+        <Logo />
 
-            <BurgerBtn
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              className="z-60 md:hidden"
-            />
+        <nav aria-label={t("label")} className="hidden items-center gap-8 md:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              className="text-small font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t(`navigation.${item.key}`)}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 md:flex">
+            <LanguageSwitcher />
+            <ThemeToggle />
           </div>
+          <Button nativeButton={false} render={<Link href={authRoutes.login} />} className="hidden sm:inline-flex">
+            {t("login")}
+          </Button>
 
-          {isOpen && (
-            <div className="absolute top-0 left-0 z-50 flex h-screen w-screen flex-col items-center justify-center gap-[clamp(24px,4vw,40px)] bg-white md:hidden">
-              <MobileNavbar isOpen={isOpen} setIsOpen={setIsOpen} />
-
-              <LanguageSelector />
-
-              <div className="block sm:hidden">
-                <BaseButton isLink href="/login">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              render={<Button variant="ghost" size="icon" className="md:hidden" aria-label={t("openMenu")} />}
+            >
+              <MenuIcon />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72">
+              <SheetHeader>
+                <SheetTitle>
+                  <Logo onClick={() => setOpen(false)} />
+                </SheetTitle>
+              </SheetHeader>
+              <nav aria-label={t("label")} className="flex flex-col gap-1 px-4">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-2 py-2 font-medium hover:bg-muted"
+                  >
+                    {t(`navigation.${item.key}`)}
+                  </Link>
+                ))}
+              </nav>
+              <div className="mt-auto flex flex-col gap-3 p-4">
+                <div className="flex items-center gap-2">
+                  <LanguageSwitcher className="flex-1" />
+                  <ThemeToggle variant="outline" />
+                </div>
+                <Button nativeButton={false} render={<Link href={authRoutes.login} />} onClick={() => setOpen(false)}>
                   {t("login")}
-                </BaseButton>
+                </Button>
               </div>
-            </div>
-          )}
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}

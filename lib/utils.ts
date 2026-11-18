@@ -1,10 +1,4 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+export { cn } from "cn";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export const getServerUrl = () => {
-  return process.env.NEXT_PUBLIC_API_URL;
-};
+/** Per-slot class overrides for multi-part components: `classNames={{ input: "…" }}`. */
+export type SlotClassNames<Slot extends string> = Partial<Record<Slot, string>>;

@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { APP_DESCRIPTION, APP_NAME } from "@/configs/app-config";
+import { fontVariables } from "@/configs/fonts";
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/providers";
 import "@/styles/globals.css";
@@ -20,11 +21,13 @@ export default async function RootLayout({ children }: LayoutProps<"/[locale]">)
   const locale = await rootParams.locale();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} className={fontVariables} suppressHydrationWarning>
       <body className="antialiased">
         <NextIntlClientProvider>
-          <Providers>{children}</Providers>
-          <Toaster richColors />
+          <Providers>
+            {children}
+            <Toaster richColors />
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>

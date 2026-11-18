@@ -1,3 +1,34 @@
 {
-  "common": {}
+  "common": {
+    "or": "ou"
+  },
+  "validation": {
+    "required": "Ce champ est requis",
+    "email": "Adresse email invalide",
+    "otpLength": "Le code doit contenir 6 chiffres",
+    "passwordTooWeak": "Le mot de passe ne respecte pas les critères",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "password": {
+      "minLength": "Au moins {count} caractères",
+      "letter": "Au moins 1 lettre",
+      "digit": "Au moins 1 chiffre",
+      "symbol": "Au moins 1 symbole"
+    }
+  },
+  "components": {
+    "passwordInput": {
+      "show": "Afficher le mot de passe",
+      "hide": "Masquer le mot de passe",
+      "strength": "Force du mot de passe"
+    },
+    "languageSwitcher": {
+      "label": "Changer de langue"
+    },
+    "themeToggle": {
+      "label": "Changer de thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    }
+  }
 }

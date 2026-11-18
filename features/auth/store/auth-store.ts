@@ -1,4 +1,3 @@
-import authRoutes from "@/features/auth/config/routes";
 import type { UserType } from "@/features/auth/types";
 import { create } from "zustand";
 import { StateStorage, createJSONStorage, persist } from "zustand/middleware";
@@ -62,7 +61,7 @@ export const useAuthStore = create<State>()(
       },
     }),
     {
-      name: "demo-creator-auth-store",
+      name: "auth-store",
       storage: createJSONStorage(() => customStorage),
       partialize: (state) => ({
         user: state.user,

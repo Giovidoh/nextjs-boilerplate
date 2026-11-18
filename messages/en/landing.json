@@ -1,46 +1,49 @@
 {
   "header": {
+    "label": "Main navigation",
+    "openMenu": "Open menu",
     "navigation": {
       "home": "Home",
-      "price": "Price",
+      "pricing": "Pricing",
       "about": "About"
     },
-    "login": "Login"
+    "login": "Sign in"
   },
   "hero": {
-    "title": "Transform your website into professional videos",
-    "description": "Paste the URL of your website and generate a professional video in seconds.",
-    "analyzeSitePlaceholder": "Paste the URL of your website",
-    "analyzeSite": "Analyze website"
+    "badge": "Next.js 16 · React 19",
+    "title": "Start your Next.js projects without starting from scratch",
+    "description": "Customizable components, token-driven theming, i18n and forms ready to use.",
+    "primaryCta": "Get started",
+    "secondaryCta": "Sign in"
   },
   "footer": {
-    "description": "ICGreborns is a generic boilerplate for Next.js applications.",
-    "copyright": "© 2025 ICGreborns. All rights reserved.",
+    "description": "{appName} is a Next.js boilerplate to start fast and clean.",
+    "copyright": "© {year} {appName}. All rights reserved.",
     "sections": {
       "navigation": {
         "title": "Navigation",
         "links": {
-          "about": "About",
-          "blog": "Blog",
           "home": "Home",
-          "pricing": "Pricing"
+          "pricing": "Pricing",
+          "about": "About",
+          "blog": "Blog"
         }
       },
       "support": {
         "title": "Support",
         "links": {
-          "contact": "Contact",
           "faq": "FAQ",
-          "helpCenter": "Help Center",
-          "status": "Service Status"
+          "helpCenter": "Help center",
+          "contact": "Contact",
+          "status": "Service status"
         }
       },
       "legal": {
         "title": "Legal",
         "links": {
-          "cookiePolicy": "Cookies",
-          "privacyPolicy": "Privacy Policy",
-          "termsOfService": "Terms of Use"
+          "privacyPolicy": "Privacy policy",
+          "termsOfService": "Terms of use",
+          "cookiePolicy": "Cookies"
         }
       }
     }

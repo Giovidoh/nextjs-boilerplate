@@ -1,3 +1,34 @@
 {
-  "common": {}
+  "common": {
+    "or": "or"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email address",
+    "otpLength": "The code must have 6 digits",
+    "passwordTooWeak": "The password doesn't meet the requirements",
+    "passwordMismatch": "Passwords don't match",
+    "password": {
+      "minLength": "At least {count} characters",
+      "letter": "At least 1 letter",
+      "digit": "At least 1 digit",
+      "symbol": "At least 1 symbol"
+    }
+  },
+  "components": {
+    "passwordInput": {
+      "show": "Show password",
+      "hide": "Hide password",
+      "strength": "Password strength"
+    },
+    "languageSwitcher": {
+      "label": "Change language"
+    },
+    "themeToggle": {
+      "label": "Change theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  }
 }

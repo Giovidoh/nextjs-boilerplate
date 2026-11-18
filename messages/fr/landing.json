@@ -1,21 +1,24 @@
 {
   "header": {
+    "label": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
     "navigation": {
       "home": "Accueil",
-      "price": "Prix",
+      "pricing": "Tarifs",
       "about": "À propos"
     },
     "login": "Connexion"
   },
   "hero": {
-    "title": "Transformez votre site web en vidéos professionnelles",
-    "description": "Collez l'URL de votre site web et générez une vidéo professionnelle en quelques secondes.",
-    "analyzeSitePlaceholder": "Collez l'URL de votre site web",
-    "analyzeSite": "Analyser le site"
+    "badge": "Next.js 16 · React 19",
+    "title": "Démarrez vos projets Next.js sans repartir de zéro",
+    "description": "Composants personnalisables, thème piloté par des tokens, i18n et formulaires prêts à l'emploi.",
+    "primaryCta": "Commencer",
+    "secondaryCta": "Se connecter"
   },
   "footer": {
-    "description": "ICGreborns est un boilerplate générique pour les applications Next.js.",
-    "copyright": "© 2025 ICGreborns. Tous droits réservés.",
+    "description": "{appName} est un boilerplate Next.js pour démarrer vite et proprement.",
+    "copyright": "© {year} {appName}. Tous droits réservés.",
     "sections": {
       "navigation": {
         "title": "Navigation",
@@ -30,7 +33,7 @@
         "title": "Support",
         "links": {
           "faq": "FAQ",
-          "helpCenter": "Centre d’aide",
+          "helpCenter": "Centre d'aide",
           "contact": "Contact",
           "status": "Statut du service"
         }
@@ -39,7 +42,7 @@
         "title": "Légal",
         "links": {
           "privacyPolicy": "Politique de confidentialité",
-          "termsOfService": "Conditions d’utilisation",
+          "termsOfService": "Conditions d'utilisation",
           "cookiePolicy": "Cookies"
         }
       }

@@ -1,9 +1,9 @@
-import { getServerUrl } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { authConfig } from "@/configs/auth-config";
 
-const serverUrl = getServerUrl();
+// Backend base URL. Server-only: never exposed to the browser.
+const serverUrl = process.env.API_URL;
 
 async function proxyRequest(
   req: NextRequest,
