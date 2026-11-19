@@ -2,8 +2,8 @@
 
 import { FormField } from "@/components/forms/form-field";
 import { OtpInput } from "@/components/forms/otp-input";
-import { SubmitButton } from "@/components/forms/submit-button";
-import { FieldGroup } from "@/components/ui/field";
+import { SubmitButton } from "@/components/actions/submit-button";
+import { FieldGroup } from "@/components/forms/field";
 import { authApi } from "@/features/auth/api";
 import authRoutes from "@/features/auth/config/routes";
 import { otpSchema, type OtpValues } from "@/features/auth/schemas";
@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/feedback/toaster";
 
 export interface OtpFormProps {
   email: string;
