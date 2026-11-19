@@ -1,4 +1,4 @@
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/feedback/toaster";
 import { APP_DESCRIPTION, APP_NAME } from "@/configs/app-config";
 import { fontVariables } from "@/configs/fonts";
 import { routing } from "@/i18n/routing";

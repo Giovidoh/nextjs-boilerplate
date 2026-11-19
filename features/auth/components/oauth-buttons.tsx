@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { FieldSeparator } from "@/components/ui/field";
+import { Button } from "@/components/actions/button";
+import { FieldSeparator } from "@/components/forms/field";
 import { cn, type SlotClassNames } from "@/lib/utils";
 import GoogleIcon from "@/public/assets/images/logos/google.svg";
 import MicrosoftIcon from "@/public/assets/images/logos/microsoft.svg";

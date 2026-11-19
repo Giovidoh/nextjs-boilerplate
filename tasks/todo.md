@@ -6,7 +6,9 @@
   - [x] Next 15 → branche `next-15`, tag `next15-v1.0.0` (cb1049b) — lint/typecheck/build/smoke + dev OK
   - [x] Next 14 → branche `next-14`, tag `next14-v1.0.0` (196e5f4) — lint/typecheck/build/smoke + dev (refs React 18) OK, avertissement EOL
   - [ ] Publication (push des branches + tags, GitHub Releases depuis `docs/releases/*.md`) — après accord explicite
-- Règle de maintenance : toute fonctionnalité arrive d'abord sur `main`, puis `git cherry-pick` vers `next-15` puis `next-14` ; sur 14, passer en `forwardRef` tout composant qui reçoit une ref (RHF ou `render` de Base UI)
+- [x] Architecture en 3 couches (2026-11-18) : `components/ui` intact (code tiers), design system dans `components/{actions,forms,feedback,overlays,display,common}`, features → design system (règle ESLint `no-restricted-imports`) — reporté sur `main`, `next-15`, `next-14` ; lint/typecheck/build/smoke + dev vérifiés sur les 3
+- [ ] Tags `v1.1.0` + releases GitHub de la réorganisation — en attente d'accord
+- Règle de maintenance : toute fonctionnalité arrive d'abord sur `main`, puis `git cherry-pick` vers `next-15` puis `next-14` ; sur 14, passer en `forwardRef` tout composant qui reçoit une ref (RHF ou `render` de Base UI), dans le design system et — seule exception autorisée — dans `components/ui`
 - [~] Vérification visuelle au clic (menu mobile, sélecteur de langue, toggle de thème) — la fenêtre de preview était masquée pendant la session du 2026-11-18
 
 ## To Do
