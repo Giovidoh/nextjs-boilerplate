@@ -2,9 +2,9 @@
 
 import { FormField } from "@/components/forms/form-field";
 import { PasswordInput } from "@/components/forms/password-input";
-import { SubmitButton } from "@/components/forms/submit-button";
-import { FieldGroup } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { SubmitButton } from "@/components/actions/submit-button";
+import { FieldGroup } from "@/components/forms/field";
+import { Input } from "@/components/forms/input";
 import { authApi } from "@/features/auth/api";
 import authRoutes from "@/features/auth/config/routes";
 import { registerSchema, type RegisterValues } from "@/features/auth/schemas";
@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/feedback/toaster";
 
 export function RegisterForm() {
   const t = useTranslations("auth.register");

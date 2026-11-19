@@ -12,6 +12,10 @@ import { forwardRef, Fragment, type ComponentProps } from "react";
 
 export type OtpInputSlot = "root" | "group" | "slot" | "separator";
 
+/** Control tokens applied on top of the third-party slots (components/ui/input-otp). */
+const slotTokens =
+  "size-(--otp-slot-size) bg-(--input-bg) dark:bg-(--input-bg) text-base first:rounded-l-(--input-radius) last:rounded-r-(--input-radius)";
+
 type BaseProps = Omit<
   ComponentProps<typeof InputOTP>,
   "children" | "render" | "maxLength" | "value" | "onChange"
@@ -60,12 +64,12 @@ export const OtpInput = forwardRef<HTMLInputElement, OtpInputProps>(function Otp
       {layout.map((size, groupIndex) => (
         <Fragment key={groupIndex}>
           {groupIndex > 0 && <InputOTPSeparator className={classNames?.separator} />}
-          <InputOTPGroup className={classNames?.group}>
+          <InputOTPGroup className={cn("rounded-(--input-radius)", classNames?.group)}>
             {Array.from({ length: size }, (_, i) => (
               <InputOTPSlot
                 key={starts[groupIndex] + i}
                 index={starts[groupIndex] + i}
-                className={classNames?.slot}
+                className={cn(slotTokens, classNames?.slot)}
               />
             ))}
           </InputOTPGroup>

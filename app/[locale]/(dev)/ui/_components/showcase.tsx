@@ -6,13 +6,13 @@ import { ThemeToggle } from "@/components/common/theme-toggle";
 import { FormField } from "@/components/forms/form-field";
 import { OtpInput } from "@/components/forms/otp-input";
 import { PasswordInput } from "@/components/forms/password-input";
-import { SubmitButton } from "@/components/forms/submit-button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
+import { SubmitButton } from "@/components/actions/submit-button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/feedback/alert";
+import { Avatar, AvatarFallback } from "@/components/display/avatar";
+import { Badge } from "@/components/feedback/badge";
+import { Button } from "@/components/actions/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/display/card";
+import { Checkbox } from "@/components/forms/checkbox";
 import {
   Dialog,
   DialogClose,
@@ -22,31 +22,31 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/overlays/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
-import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+} from "@/components/overlays/dropdown-menu";
+import { Field, FieldGroup, FieldLabel } from "@/components/forms/field";
+import { Input } from "@/components/forms/input";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/forms/input-group";
+import { Label } from "@/components/forms/label";
+import { Progress } from "@/components/feedback/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/forms/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/forms/select";
+import { Skeleton } from "@/components/feedback/skeleton";
+import { Spinner } from "@/components/feedback/spinner";
+import { Switch } from "@/components/forms/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/display/tabs";
+import { Textarea } from "@/components/forms/textarea";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/overlays/tooltip";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MailIcon, PlusIcon, SearchIcon, Trash2Icon } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { toast } from "@/components/feedback/toaster";
 import { z } from "zod";
 
 const buttonVariants = ["default", "secondary", "outline", "ghost", "destructive", "link"] as const;

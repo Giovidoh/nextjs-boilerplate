@@ -1,6 +1,6 @@
 "use client";
 
-import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
+import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/forms/field";
 import { cn, type SlotClassNames } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useId, type ReactNode } from "react";
